@@ -1,0 +1,12 @@
+﻿Job 1:
+extra-margin
+envelopes 520.00
+letterhead 1983.37 exempt
+
+Job 2:
+t-shirts 294.04
+
+Job 3:
+extra-margin
+frisbees 19385.38 exempt
+yo-yos 1829 exempt
