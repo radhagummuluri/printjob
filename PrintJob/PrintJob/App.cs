@@ -11,19 +11,19 @@ namespace PrintJob
         private readonly ILogger<App> _logger;
         private readonly AppSettings _appSettings;
         private readonly IJobFileProcessor _jobFileProcessor;
-        private readonly IJobCalculationService _jobCalculationService;
 
-        public App(IOptions<AppSettings> appSettings, ILogger<App> logger, IJobFileProcessor jobFileProcessor, IJobCalculationService jobCalculationService)
+        public App(IOptions<AppSettings> appSettings, ILogger<App> logger, IJobFileProcessor jobFileProcessor)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _appSettings = appSettings?.Value ?? throw new ArgumentNullException(nameof(appSettings));
             _jobFileProcessor = jobFileProcessor;
-            _jobCalculationService = jobCalculationService;
         }
 
         public async Task Run()
         {
-            var jobs = await _jobFileProcessor.ProcessFile();
+            var jobs = await _jobFileProcessor.ProcessInputFile();
+
+            await _jobFileProcessor.GenerateInvoices(jobs);
         }
     }
 
@@ -32,5 +32,6 @@ namespace PrintJob
         public double SalesTax { get; set; }
         public double Margin { get; set; }
         public double ExtraMargin { get; set; }
+        public string JobInputFile { get; set; }
     }
 }

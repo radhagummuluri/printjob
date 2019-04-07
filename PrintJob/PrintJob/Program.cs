@@ -41,11 +41,8 @@ namespace PrintJob
             services.AddOptions();
             services.Configure<AppSettings>(configuration.GetSection("App"));
 
-            // add services:
             services.AddTransient<IJobFileProcessor, JobFileProcessor>();
-            services.AddTransient<IJobCalculationService, JobCalculationService>();
 
-            // add app
             services.AddTransient<App>();
         }
     }

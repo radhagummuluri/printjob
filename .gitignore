@@ -25,3 +25,7 @@ PrintJob/.vs/PrintJob/v15/Server/sqlite3/storage.ide-shm
 PrintJob/.vs/PrintJob/v15/Server/sqlite3/storage.ide
 PrintJob/.vs/PrintJob/v15/Server/sqlite3/db.lock
 PrintJob/.vs/PrintJob/v15/.suo
+PrintJob/PrintJob/bin/Debug/netcoreapp2.1/output/Job-3.txt
+PrintJob/PrintJob/bin/Debug/netcoreapp2.1/output/Job-2.txt
+PrintJob/PrintJob/bin/Debug/netcoreapp2.1/output/Job-1.txt
+PrintJob/.vs/config/applicationhost.config
