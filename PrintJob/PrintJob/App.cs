@@ -33,5 +33,6 @@ namespace PrintJob
         public double Margin { get; set; }
         public double ExtraMargin { get; set; }
         public string JobInputFile { get; set; }
+        public string InvoiceOutputFolder { get; set; }
     }
 }

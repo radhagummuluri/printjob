@@ -18,11 +18,13 @@ namespace PrintJob.Services
 
     public class JobFileProcessor : IJobFileProcessor
     {
+        private string _outputDirectory;
         private AppSettings _appSettings;
 
         public JobFileProcessor(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
+            _outputDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), _appSettings.InvoiceOutputFolder);
         }
 
         public async Task<IList<Job>> ProcessInputFile()
@@ -74,12 +76,12 @@ namespace PrintJob.Services
 
         public async Task GenerateInvoices(IList<Job> jobs)
         {
-            if(Directory.Exists("output"))
+            if (Directory.Exists(_outputDirectory))
             {
-                Directory.Delete("output", true);
+                Directory.Delete(_outputDirectory, true);
             }
 
-            Directory.CreateDirectory("output");
+            Directory.CreateDirectory(_outputDirectory);
             await jobs.ParallelForEachAsync(async (job) =>
             {
                 await GenerateInvoice(job);
@@ -98,7 +100,7 @@ namespace PrintJob.Services
             jobOutput.AppendLine($"total: {job.FinalTotalToEvenCent}");
 
             // Write the specified text asynchronously to a new file named "WriteTextAsync.txt".
-            using (StreamWriter outputFile = new StreamWriter(Path.Combine("output", $"{job.Name.Replace(" ", "-")}.txt")))
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(_outputDirectory, $"{job.Name.Replace(" ", "-")}.txt")))
             {
                 await outputFile.WriteAsync(jobOutput.ToString());
             }
